@@ -11,4 +11,5 @@
         password: "{{ password }}"
         groups:
          - Administrators
+         - Remote Desktop Users
         state: present
