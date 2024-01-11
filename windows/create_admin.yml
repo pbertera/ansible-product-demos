@@ -6,7 +6,7 @@
 
   tasks:
     - name: Change password
-      ansible.windows.user:
+      ansible.windows.win_user:
         name: "{{ user_name }}"
         password: "{{ password }}"
         groups:
