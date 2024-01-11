@@ -1,0 +1,14 @@
+---
+- name: Create Admin User
+  hosts: "{{ _hosts | default('windows') }}"
+  vars:
+    iis_message: undef
+
+  tasks:
+    - name: Change password
+      ansible.windows.user:
+        name: "{{ user_name }}"
+        password: "{{ password }}"
+        groups:
+         - Administrators
+        state: present
