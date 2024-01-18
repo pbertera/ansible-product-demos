@@ -4,7 +4,7 @@
   gather_facts: false
 
   tasks:
-  - name: Create Registry Key Job template
+  - name: Create Day 2 Job Templates
     ansible.builtin.include_role:
       name: "redhat_cop.controller_configuration.job_templates"
     vars:
@@ -55,7 +55,7 @@
            required: true
            default: windows
 
-  - name: Create Registry Key Job template
+  - name: Create Day 2 Workflow template
     ansible.builtin.include_role:
       name: "redhat_cop.controller_configuration.workflow_job_templates"
     vars:
