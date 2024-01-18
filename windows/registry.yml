@@ -6,10 +6,10 @@
   tasks:
   - name: Create registry path MyCompany
     win_regedit:
-      path: "HKCU:\Software\MyCompany"
+      path: HKCU:\Software\MyCompany
 
   - name: Add or update registry path MyCompany
     win_regedit:
-      path: "HKCU:\Software\MyCompany"
+      path: HKCU:\Software\MyCompany
       name: "{{ reg_key }}"
       data: "{{ reg_value }}"
