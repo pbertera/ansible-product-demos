@@ -79,6 +79,7 @@
         simplified_workflow_nodes:
         - identifier: Install IIS
           unified_job_template: "WINDOWS / Install IIS"
-          success_nodes: Registry
+          success_nodes:
+          - Registry
         - identifier: Registry
           unified_job_template: "WINDOWS / Create Registry key"
