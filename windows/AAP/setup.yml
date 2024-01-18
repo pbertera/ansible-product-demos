@@ -9,7 +9,7 @@
       name: "redhat_cop.controller_configuration.job_templates"
     vars:
       controller_templates:
-      - name: "Create Registry key"
+      - name: "WINDOWS / Create Registry key"
         job_type: "run"
         organization: "Default"
         inventory: "Demo Inventory"
@@ -33,3 +33,50 @@
             required: true
             default: world
         state: "present"
+       - name: "WINDOWS / Install IIS"
+         job_type: run
+         inventory: "Demo Inventory"
+         project: "Ansible official demo project"
+         playbook: "windows/install_iis.yml"
+         credentials:
+         - "Demo Credential"
+         survey_enabled: true
+         survey:
+           name: ''
+          description: ''
+          spec:
+          - question_name: Server Name or Pattern
+            type: text
+            variable: _hosts
+            required: false
+          - question_name: web content
+            type: text
+            variable: iis_message
+            required: true
+            default: windows
+      controller_workflows:
+      - name: "WINDOWS / Day2 Workflow"
+        organization: Default
+        survey_enabled: true
+        survey:
+          name: ''
+          description: ''
+          spec:
+          - question_name: Server Name or Pattern
+            type: text
+            variable: _hosts
+            required: false
+          - question_name: web content
+            type: text
+            variable: iis_message
+            required: true
+            default: windows
+        simplified_workflow_nodes:
+        - identifier: Install IIS
+          unified_job_template: "WINDOWS / Install IIS"
+          success_nodes: Registry
+        - identifier: Registry
+          unified_job_template: "WINDOWS / Create Registry key"
+
+
+
