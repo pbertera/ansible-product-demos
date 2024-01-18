@@ -1,6 +1,6 @@
 ---
 - name: Install 7Zip from MSI
-  hosts: "{{ _hosts | default('windows')"
+  hosts: "{{ _hosts | default('windows') }}"
   gather_facts: false
 
   tasks:
