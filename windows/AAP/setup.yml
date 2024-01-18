@@ -77,6 +77,16 @@
             variable: iis_message
             required: true
             default: Test Message
+          - question_name: Registry Key Name
+            type: "text"
+            variable: reg_key
+            required: true
+            default: hello
+          - question_name: Registry Key Value
+            type: "text"
+            variable: reg_value
+            required: true
+            default: world
         simplified_workflow_nodes:
         - identifier: Install IIS
           unified_job_template: "WINDOWS / Install IIS"
