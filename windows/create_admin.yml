@@ -8,7 +8,7 @@
     - name: Change password
       ansible.windows.win_user:
         name: "{{ user_name }}"
-        password: "{{ password }}"
+        password: "{{ user_password }}"
         groups:
          - Administrators
          - Remote Desktop Users
