@@ -1,15 +1,15 @@
 ---
-- name: Install 7Zip from MSI
+- name: Create a registry key
   hosts: "{{ _hosts | default('windows') }}"
   gather_facts: false
 
   tasks:
   - name: Create registry path MyCompany
     win_regedit:
-      path: HKCU:\Software\MyCompany
+      path: "HKCU:\Software\MyCompany"
 
-  - name: Add or update registry path MyCompany, with entry 'hello', and containing 'world'
+  - name: Add or update registry path MyCompany
     win_regedit:
-      path: HKCU:\Software\MyCompany
-      name: hello
-      data: world
+      path: "HKCU:\Software\MyCompany"
+      name: "{{ reg_key }}"
+      data: "{{ reg_value }}"

@@ -1,0 +1,29 @@
+---
+- name: Setup demo
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - name: Create Registry Key Job template
+    job_template:
+      name: "Create Registry key"
+      job_type: "run"
+      organization: "Default"
+      inventory: "Demo Inventory"
+      project: "Ansible official demo project"
+      playbook: "windows/registry.yml"
+      credentials:
+      - "Demo Credential"
+      survey_enabled: yes
+      survey_spec:
+      - question_name: Key Name
+        type: "text"
+        variable: reg_key
+        required: true
+        default: hello
+      - question_name: Key Value
+        type: "text"
+        variable: reg_value
+        required: true
+        default: world
+      state: "present"
