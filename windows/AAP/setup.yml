@@ -33,27 +33,27 @@
             required: true
             default: world
         state: "present"
-       - name: "WINDOWS / Install IIS"
-         job_type: run
-         inventory: "Demo Inventory"
-         project: "Ansible official demo project"
-         playbook: "windows/install_iis.yml"
-         credentials:
-         - "Demo Credential"
-         survey_enabled: true
-         survey:
-           name: ''
-          description: ''
-          spec:
-          - question_name: Server Name or Pattern
-            type: text
-            variable: _hosts
-            required: false
-          - question_name: web content
-            type: text
-            variable: iis_message
-            required: true
-            default: windows
+      - name: "WINDOWS / Install IIS"
+        job_type: run
+        inventory: "Demo Inventory"
+        project: "Ansible official demo project"
+        playbook: "windows/install_iis.yml"
+        credentials:
+        - "Demo Credential"
+        survey_enabled: true
+        survey:
+         name: ''
+         description: ''
+         spec:
+         - question_name: Server Name or Pattern
+           type: text
+           variable: _hosts
+           required: false
+         - question_name: web content
+           type: text
+           variable: iis_message
+           required: true
+           default: windows
       controller_workflows:
       - name: "WINDOWS / Day2 Workflow"
         organization: Default
@@ -77,6 +77,3 @@
           success_nodes: Registry
         - identifier: Registry
           unified_job_template: "WINDOWS / Create Registry key"
-
-
-
