@@ -1,0 +1,13 @@
+---
+- name: Install 7Zip from MSI
+  hosts: "{{ _hosts | default('windows')"
+  gather_facts: false
+
+  tasks:
+    - name: Install MSI
+      ansible.windows.win_package:
+        path: https://www.7-zip.org/a/7z2301-x64.exe
+        arguments: /S
+        product_id: 7-Zip
+        state: present
+
