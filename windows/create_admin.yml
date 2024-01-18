@@ -1,6 +1,6 @@
 ---
 - name: Create Admin User
-  hosts: "{{ _hosts | default('windows') }}"
+  hosts: "{{ _hosts | default('os_windows') }}"
   vars:
     iis_message: undef
 
