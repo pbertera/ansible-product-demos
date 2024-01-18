@@ -16,8 +16,8 @@
         state: started
 
     - name: Create website index.html
-      ansible.windows.win_copy:
-        content: "{{ iis_message }}"
+      ansible.windows.win_template:
+        src: templates/index.html.j2
         dest: C:\Inetpub\wwwroot\index.html
 
     - name: Show website address
