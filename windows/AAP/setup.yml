@@ -18,15 +18,18 @@
         credentials:
         - "Demo Credential"
         survey_enabled: yes
-        survey_spec:
-        - question_name: Key Name
-          type: "text"
-          variable: reg_key
-          required: true
-          default: hello
-        - question_name: Key Value
-          type: "text"
-          variable: reg_value
-          required: true
-          default: world
+        survey:
+          name: ""
+          description: ""
+          spec:
+          - question_name: Key Name
+            type: "text"
+            variable: reg_key
+            required: true
+            default: hello
+          - question_name: Key Value
+            type: "text"
+            variable: reg_value
+            required: true
+            default: world
         state: "present"
