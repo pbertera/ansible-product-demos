@@ -71,11 +71,12 @@
             type: text
             variable: _hosts
             required: false
+            default: windows
           - question_name: web content
             type: text
             variable: iis_message
             required: true
-            default: windows
+            default: Test Message
         simplified_workflow_nodes:
         - identifier: Install IIS
           unified_job_template: "WINDOWS / Install IIS"
