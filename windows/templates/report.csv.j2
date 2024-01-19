@@ -1,4 +1,4 @@
-NODENAME,DOMAIN,DISTRIBUTION,MAJOR_VERSION,VERSION
+NODENAME,DOMAIN,DISTRIBUTION,MAJOR_VERSION,VERSION,IP,MAC,LASTBOOT,UPTIME,PROCESSOR,PROCESSOR_CORES,PROCESSOR_COUNT,MY_COMPANY
 {% for host in ansible_play_hosts %}
-{{ hostvars[host].nodename }}, {{ hostvars[host].domain }},{{ hostvars[host].distribution }},{{ hostvars[host].distribution_major_version }},{{ hostvars[host].distribution_version }}
+{{ hostvars[host].nodename }}, {{ hostvars[host].domain }},{{ hostvars[host].distribution }},{{ hostvars[host].distribution_major_version }},{{ hostvars[host].distribution_version }},{{ hostvars[host].ipv4_address }},{{ hostvars[host].mac_address }},{{ hostvars[host].lastboot }},{{ hostvars[host].uptime }},{{ hostvars[host].processor }},{{ hostvars[host].processor_cores }},{{ hostvars[host].processor_count }},{{ hostvars[host].my_company }}
 {% endfor %}
