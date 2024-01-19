@@ -11,9 +11,9 @@
       path: HKLM:\Software\MyCompany
       register: my_company
 
-#  - name: Set fact with MyCompany key
-#    ansible.builtin.set_fact:
-#      my_company: "{{ my_company }}"
+  - name: Set fact with MyCompany key
+    ansible.builtin.set_fact:
+      my_company: "{{ my_company }}"
 
   - name: Set custom facts
     ansible.builtin.set_fact:
