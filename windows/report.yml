@@ -14,7 +14,6 @@
     ansible.builtin.set_fact:
       my_company: "{{ my_company }}"
 
-  tasks:
   - name: Set custom facts
     set_fact:
       nodename: "{{ ansible_facts['nodename'] }}"
@@ -30,9 +29,10 @@
       processor_cores: "{{ ansible_facts['processor_cores'] }}"
       processor_count: "{{ ansible_facts['processor_count']}}"
 
-- name: Create Reports
-  hosts: "{{ _report_host | default('windows') }}"
-  gather_facts: false
+#- name: Create Reports
+#  hosts: "{{ _report_host | default('windows') }}"
+#  gather_facts: false
+#  tasks:
   
   - name: Create raw JSON facts report
     copy:
@@ -45,10 +45,12 @@
       run_once: true
 
   - name: Create custom CSV
+    delegate_to: "{{ report_host }}"
     ansible.windows.win_template:
       src: templates/report.csv.j2
       dest: C:\Inetpub\wwwroot\report.csv
 
   - name: Show report
+    delegate_to: "{{ report_host }}"
     ansible.builtin.debug:
       msg: http://{{ ansible_host }} 

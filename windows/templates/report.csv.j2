@@ -1,0 +1,4 @@
+NODENAME,DOMAIN,DISTRIBUTION,MAJOR_VERSION,VERSION
+{% for host in ansible_play_hosts %}
+{{ hostvars[host].nodename }}, {{ hostvars[host].domain }},{{ hostvars[host].distribution }},{{ hostvars[host].distribution_major_version }},{{ hostvars[host].distribution_version }}
+{% endfor %}
