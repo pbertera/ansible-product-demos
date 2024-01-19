@@ -15,7 +15,8 @@
 - name: Create Reports
   hosts: "{{ _report_host | default('windows') }}"
   gather_facts: false
-
+  
+  tasks:
   - name: Set custom facts
     set_fact:
       nodename: "{{ ansible_facts['nodename'] }}"
