@@ -36,22 +36,24 @@
 #  tasks:
   
   - name: Create raw JSON facts report
-    delegate_to: "{{ report_host }}"
     copy:
       content: |
         {% for host in ansible_play_hosts %}
         {{ hostvars[host].ansible_facts | to_nice_json }}
         {% endfor %}
       dest: C:\Inetpub\wwwroot\report.json
-      run_once: true
+    run_once: true
+    delegate_to: "{{ report_host }}"
 
   - name: Create custom CSV
-    delegate_to: "{{ report_host }}"
     ansible.windows.win_template:
       src: templates/report.csv.j2
       dest: C:\Inetpub\wwwroot\report.csv
+    run_once: true
+    delegate_to: "{{ report_host }}"
 
   - name: Show report
-    delegate_to: "{{ report_host }}"
     ansible.builtin.debug:
       msg: http://{{ ansible_host }} 
+    run_once: true
+    delegate_to: "{{ report_host }}"
