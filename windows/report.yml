@@ -40,7 +40,7 @@
         {% for host in ansible_play_hosts %}
         {{ hostvars[host].ansible_facts | to_nice_json }}
         {% endfor %}
-      dest: "{{ report_json }}"
+      dest: C:\Inetpub\wwwroot\report.json
       delegate_to: "{{ report_host }}"
       run_once: true
 
