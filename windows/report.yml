@@ -1,5 +1,5 @@
 ---
-- name: Create a registry key
+- name: Create host reports
   hosts: "{{ _hosts | default('os_windows') }}"
   gather_facts: true
   vars:
@@ -40,17 +40,13 @@
       processor_count: "{{ ansible_facts['processor_count'] }}"
       my_company: "{{ my_company }}"
 
-- name: Create report
-  hosts: "{{ report_host }}"
-  gather_facts: false
-  tasks:
-  - name: Create custom CSV
+  - name: Create custom CSV report
     ansible.windows.win_template:
       src: templates/report.csv.j2
       dest: C:\Inetpub\wwwroot\report.csv
-#    delegate_to: "{{ report_host }}"
+    delegate_to: "{{ report_host }}"
 
   - name: Show report
     ansible.builtin.debug:
       msg: http://{{ ansible_host }}/report.csv
-#    delegate_to: "{{ report_host }}"
+    delegate_to: "{{ report_host }}"
