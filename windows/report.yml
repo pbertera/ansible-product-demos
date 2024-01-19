@@ -18,7 +18,7 @@
   - name: Gather MyCompany registry Key
     ansible.windows.win_reg_stat:
       path: HKLM:\Software\MyCompany
-      register: my_company
+    register: my_company
 
   - name: Set fact with MyCompany key
     ansible.builtin.set_fact:
