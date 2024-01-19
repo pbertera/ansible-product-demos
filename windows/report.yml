@@ -2,6 +2,8 @@
 - name: Create a registry key
   hosts: "{{ _hosts | default('os_windows') }}"
   gather_facts: true
+  vars:
+    my_company: ''
 
   tasks:
   - name: Gather MyCompany registry Key
