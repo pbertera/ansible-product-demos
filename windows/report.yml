@@ -47,6 +47,6 @@
       src: templates/report.csv.j2
       dest: C:\Inetpub\wwwroot\report.csv
 
- - name: Show report
-   ansible.builtin.debug:
+  - name: Show report
+    ansible.builtin.debug:
       msg: http://{{ ansible_host }} 
