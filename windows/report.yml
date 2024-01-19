@@ -1,0 +1,51 @@
+---
+- name: Create a registry key
+  hosts: "{{ _hosts | default('os_windows') }}"
+  gather_facts: true
+
+  tasks:
+  - name: Gather MyCompany registry Key
+    ansible.windows.win_reg_stat:
+      path: HKLM:\Software\MyCompany
+      register: my_company
+  - name: Set fact with MyCompany key
+    ansible.builtin.set_fact:
+      my_company: "{{ my_company }}"
+
+- name: Create Reports
+  hosts: "{{ _report_host | default('windows') }}"
+  gather_facts: false
+
+  - name: Set custom facts
+    set_fact:
+      nodename: "{{ ansible_facts['nodename'] }}"
+      domain: "{{ ansible_facts['domain'] }}"
+      distribution: "{{ ansible_facts['distribution'] }}"
+      distribution_major_version: "{{ ansible_facts['distribution_major_version'] }}"
+      distribution_version: "{{ ansible_facts['distribution_version'] }}"
+      ipv4_address: "{{ ansible_facts | json_query('ip_addresses[0]') }}"
+      mac_address: "{{ ansible_facts | json_query('interfaces[*].macaddress') }}"
+      lastboot: "{{ ansible_facts['lastboot'] }}"
+      uptime: "{{ ansible_facts['uptime_seconds'] }}"
+      processor: "{{ ansible_facts | json_query('processor[1]') }}"
+      processor_cores: "{{ ansible_facts['processor_cores'] }}"
+      processor_count: "{{ ansible_facts['processor_count']}}"
+
+  - name: Create raw JSON facts report
+    copy:
+      content: |
+        {% for host in ansible_play_hosts %}
+        {{ hostvars[host].ansible_facts | to_nice_json }}
+        {% endfor %}
+      dest: "{{ report_json }}"
+      delegate_to: "{{ report_host }}"
+      run_once: true
+
+  - name: Create custom CSV
+    ansible.windows.win_template:
+      src: templates/report.csv.j2
+      dest: C:\Inetpub\wwwroot\report.csv
+
+ - name: Show report
+   ansible.builtin.debug:
+      msg: http://{{ ansible_host }} 
